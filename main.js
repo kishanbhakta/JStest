@@ -1,4 +1,4 @@
-// This is the JavaScript test.  In this test, you will pull website
+// This is the JavaScript challenge.  In this challenge, you will pull website
 // performance data from the Compete.com API and use it to display a
 // graph.
 
@@ -10,8 +10,8 @@
 // chart WITHOUT refreshing the page.
 
 // This is the only file you may edit. index.html is pre set up enough
-// that you can complete the test without changing it.  You will of
-// course need to review index.html throughout the test as it contains
+// that you can complete the challenge without changing it.  You will of
+// course need to review index.html throughout the challenge as it contains
 // the dom elements you will need to either manipulate or read values
 // from.  You are allowed to append script tags, but the script tags
 // may not point to third party JS libraries like jQuery
