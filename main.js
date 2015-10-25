@@ -26,23 +26,83 @@
 // But it is preferable that you create your own key.
 
 // Feel free to e-mail lots of questions.
- 
+
+
+var goBtn = document.getElementById('go');
+goBtn.onclick = function(){console.log(makeChart())};
+
 
 function makeChart (data, metricName, metricCode, domain) {
-    // Params:
+
+    // Create URL
+
+        function buildURL(data) {
+            var url = "https://apps.compete.com/sites/";
+                // console.log(url);
+            var domain = document.getElementById("domain").value;
+                // console.log(domain);
+            var e = document.getElementById("metric");
+            var metricCode = e.options[e.selectedIndex].value;
+                // console.log(metric);
+            var sd = document.getElementsByName("start_date")[0].value;
+            var start_date = sd.replace(/-/g,"");
+                // console.log(start_date);
+            var ed = document.getElementsByName("end_date")[0].value;
+            var end_date = ed.replace(/-/g,"");
+                // console.log(end_date);
+            var apiKey = "d52368aed29abbf531b8b944c5a48092";
+            var latest = document.getElementsByName("latest")[0].value;
+            // console.log(data);
+
+             // var something = data.data.trends
+             // console.log(something);
+            // console.log(latest);
+                if(start_date === '' || end_date === ''){
+                    return url + domain + '/' + 'trended/' + metricCode + '/?apikey=' + apiKey + '&latest=' + latest;
+                } else{
+                return url + domain + '/' + 'trended/' + metricCode + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date;
+                    }
+            };
+                    console.log(buildURL());
+
+    //Callback functions
+    if (document.querySelectorAll) {
+    var dataLookup = {metricName:'Rank', metricCode:'rank'},
+                     {metricName:'Unique Visitors', metricCode:'uv'},
+                     {metricName:'Visits', metricCode:'vis'},
+                     {metricName:'Page Views', metricCode:'pv'},
+                     {metricName:'Average Stay', metricCode:'avgstay'},
+                     {metricName:'Visits per Person', metricCode:'vpp'},
+                     {metricName:'Pages per Person', metricCode:'ppv'},
+                     {metricName:'Attention', metricCode:'att'}
+      }
+
     // `data` - the raw data Compete gives you after the JSONP request
+
+            var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = false;
+                s.src = buildURL();
+                s.id = 'jsonp';
+            var h = document.getElementsByTagName('script')[0];
+                h.parentNode.insertBefore(s, h);//insert before main.js
+
+            var data = {};
+
+           // var api = buildURL();
+            //     console.log(api);
     // `metricName` - a name from the Metric drop down.
     // `metricCode` - the corresponding value denoted in each metricName <option>
     // `domain`  -  the domain of interest.
-    
+
     // This function is used to create the Highcharts graph with the
     // data you retrieve from Compete.
-    
+
     // Don't try to understand this function.  Just give it the right
     // inputs and it will create the chart and render it into the page
     // for you.
 
-    
+
     function getUTC(datestring){
         return Date.UTC(datestring.substring(0,4), datestring.substring(4)-1);
     }
@@ -149,4 +209,3 @@ function makeChart (data, metricName, metricCode, domain) {
         }]
     });
 }
-

@@ -1,6 +1,3 @@
-<script type="text/javascript" src="highcharts-custom.js"></script>
-<script type="text/javascript" src="main.js"></script>
-
 <div id="container" style="min-width: 310px; height: 400px; margin:0 auto"></div>
 
 <p id="error" style="color:red"></p>
@@ -32,3 +29,8 @@
 <p>Select data from the last <input type="number" name="latest" min="1" max="25" /> Months <button id="clearLatest">Clear</button></p>
 
 <button id="go">GO!</button>
+
+<!-- These script tags need to be located at the bottom of the page because there is not a defined <head> or <body>-->
+<!-- Therefore, we have to wait until the full page loads in order to have the scripts run. -->
+<script type="text/javascript" src="highcharts-custom.js"></script>
+<script type="text/javascript" src="main.js"></script>
