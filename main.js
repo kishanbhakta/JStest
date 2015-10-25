@@ -42,7 +42,7 @@ function makeChart (data, metricName, metricCode, domain) {
             var domain = document.getElementById("domain").value;
                 // console.log(domain);
             var e = document.getElementById("metric");
-            var metricCode = e.options[e.selectedIndex].value;
+            var metric = e.options[e.selectedIndex].value;
                 // console.log(metric);
             var sd = document.getElementsByName("start_date")[0].value;
             var start_date = sd.replace(/-/g,"");
@@ -58,51 +58,56 @@ function makeChart (data, metricName, metricCode, domain) {
              // console.log(something);
             // console.log(latest);
                 if(start_date === '' || end_date === ''){
-                    return url + domain + '/' + 'trended/' + metricCode + '/?apikey=' + apiKey + '&latest=' + latest;
+                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest;
                 } else{
-                return url + domain + '/' + 'trended/' + metricCode + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date;
+                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date;
                     }
             };
                     console.log(buildURL());
-
     //Callback functions
-    if (document.querySelectorAll) {
-    var dataLookup = {metricName:'Rank',
-                      metricCode:'rank',
-                      metricName:'Unique Visitors',
-                      metricCode:'uv',
-                      metricName:'Visits',
-                      metricCode:'vis',
-                      metricName:'Page Views',
-                      metricCode:'pv',
-                      metricName:'Average Stay',
-                      metricCode:'avgstay',
-                      metricName:'Visits per Person',
-                      metricCode:'vpp',
-                      metricName:'Pages per Person',
-                      metricCode:'ppv',
-                      metricName:'Attention',
-                      metricCode:'att'};
-    var val = "";
-    var i;
-    for (i in dataLookup) {
-        val += dataLookup[i];
-    }
-  };
+  //   if (document.querySelectorAll) {
+  //   var dataLookup = {metricName:'Rank',
+  //                     metricCode:'rank',
+  //                     metricName:'Unique Visitors',
+  //                     metricCode:'uv',
+  //                     metricName:'Visits',
+  //                     metricCode:'vis',
+  //                     metricName:'Page Views',
+  //                     metricCode:'pv',
+  //                     metricName:'Average Stay',
+  //                     metricCode:'avgstay',
+  //                     metricName:'Visits per Person',
+  //                     metricCode:'vpp',
+  //                     metricName:'Pages per Person',
+  //                     metricCode:'ppv',
+  //                     metricName:'Attention',
+  //                     metricCode:'att'};
+  //   var val = "";
+  //   var i;
+  //   for (i in dataLookup) {
+  //       val += dataLookup[i];
+  //   }
+  // };
     // `data` - the raw data Compete gives you after the JSONP request
 
-            var s = document.createElement('script');
-                s.type = 'text/javascript';
-                s.async = false;
-                s.src = buildURL();
-                s.id = 'jsonp';
-            var h = document.getElementsByTagName('script')[0];
-                h.parentNode.insertBefore(s, h);//insert before main.js
+        var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = buildURL();
+            s.id = 'jsonp';
+        var h = document.getElementsByTagName('script')[0];
+            h.parentNode.insertBefore(s, h);//insert before main.js
 
-            var data = {};
+       //  var data = {};
+       //  var getData = function (options) {
+       //      document.getElementById('jsonp').innerHTML = options;
+       //      data.push('options');
+       // };
+       //     console.log(data);s
 
-           // var api = buildURL();
-            //     console.log(api);
+       //  var api = buildURL();
+       //     console.log(api);
+
     // `metricName` - a name from the Metric drop down.
     // `metricCode` - the corresponding value denoted in each metricName <option>
     // `domain`  -  the domain of interest.
