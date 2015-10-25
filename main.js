@@ -27,6 +27,12 @@
 
 // Feel free to e-mail lots of questions.
 
+// Try to make your code work like this:
+// 1. The user clicks GO
+// 2. This triggers an .onclick event listener where you read input values to construct the url for the `src` of the script tag.
+// This url should include a `jsonp=callback` query parameter, where callback is a function that receives data from compete.
+// 3. `callback` receives the data and then calls `makeChart` with the data and the three other parameters read from the inputs.
+
 
 var goBtn = document.getElementById('go');
 goBtn.onclick = function(){console.log(makeChart())};
@@ -58,36 +64,17 @@ function makeChart (data, metricName, metricCode, domain) {
              // console.log(something);
             // console.log(latest);
                 if(start_date === '' || end_date === ''){
-                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest;
+                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=' + callback;
                 } else{
-                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date;
+                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=' + callback;
                     }
             };
                     console.log(buildURL());
     //Callback functions
-  //   if (document.querySelectorAll) {
-  //   var dataLookup = {metricName:'Rank',
-  //                     metricCode:'rank',
-  //                     metricName:'Unique Visitors',
-  //                     metricCode:'uv',
-  //                     metricName:'Visits',
-  //                     metricCode:'vis',
-  //                     metricName:'Page Views',
-  //                     metricCode:'pv',
-  //                     metricName:'Average Stay',
-  //                     metricCode:'avgstay',
-  //                     metricName:'Visits per Person',
-  //                     metricCode:'vpp',
-  //                     metricName:'Pages per Person',
-  //                     metricCode:'ppv',
-  //                     metricName:'Attention',
-  //                     metricCode:'att'};
-  //   var val = "";
-  //   var i;
-  //   for (i in dataLookup) {
-  //       val += dataLookup[i];
-  //   }
-  // };
+        function callback (data) {
+            console.log(data);
+        };
+
     // `data` - the raw data Compete gives you after the JSONP request
 
         var s = document.createElement('script');
@@ -98,15 +85,7 @@ function makeChart (data, metricName, metricCode, domain) {
         var h = document.getElementsByTagName('script')[0];
             h.parentNode.insertBefore(s, h);//insert before main.js
 
-       //  var data = {};
-       //  var getData = function (options) {
-       //      document.getElementById('jsonp').innerHTML = options;
-       //      data.push('options');
-       // };
-       //     console.log(data);s
 
-       //  var api = buildURL();
-       //     console.log(api);
 
     // `metricName` - a name from the Metric drop down.
     // `metricCode` - the corresponding value denoted in each metricName <option>
