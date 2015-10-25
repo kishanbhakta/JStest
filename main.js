@@ -67,16 +67,28 @@ function makeChart (data, metricName, metricCode, domain) {
 
     //Callback functions
     if (document.querySelectorAll) {
-    var dataLookup = {metricName:'Rank', metricCode:'rank'},
-                     {metricName:'Unique Visitors', metricCode:'uv'},
-                     {metricName:'Visits', metricCode:'vis'},
-                     {metricName:'Page Views', metricCode:'pv'},
-                     {metricName:'Average Stay', metricCode:'avgstay'},
-                     {metricName:'Visits per Person', metricCode:'vpp'},
-                     {metricName:'Pages per Person', metricCode:'ppv'},
-                     {metricName:'Attention', metricCode:'att'}
-      }
-
+    var dataLookup = {metricName:'Rank',
+                      metricCode:'rank',
+                      metricName:'Unique Visitors',
+                      metricCode:'uv',
+                      metricName:'Visits',
+                      metricCode:'vis',
+                      metricName:'Page Views',
+                      metricCode:'pv',
+                      metricName:'Average Stay',
+                      metricCode:'avgstay',
+                      metricName:'Visits per Person',
+                      metricCode:'vpp',
+                      metricName:'Pages per Person',
+                      metricCode:'ppv',
+                      metricName:'Attention',
+                      metricCode:'att'};
+    var val = "";
+    var i;
+    for (i in dataLookup) {
+        val += dataLookup[i];
+    }
+  };
     // `data` - the raw data Compete gives you after the JSONP request
 
             var s = document.createElement('script');
