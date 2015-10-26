@@ -30,8 +30,8 @@
 //onClick event on buildURL()
 document.getElementById('go').addEventListener('click', function(){
     buildURL();
+    console.log(buildURL());
     appendScript();
-    // makeChart();
 });
 
 
@@ -54,44 +54,36 @@ function buildURL (data) {
             var latest = document.getElementsByName("latest")[0].value;
             // console.log(latest);
                 if(start_date === '' || end_date === ''){
-                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
+                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=makeChart';
                 } else{
-                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
+                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=makeChart';
                     }
 
             };
 
-            // console.log(buildURL());
+
+
 
 function appendScript(s, h){
-    var s = document.createElement('script');
+var s = document.createElement('script');
         s.type = 'text/javascript';
         s.async = true;
         s.src = buildURL();
         s.id = 'jsonp';
     var h = document.getElementsByTagName('script')[0];
         h.parentNode.insertBefore(s, h);
+
 }
 
-//Callback Function
-function callback (data) {
-    console.log(data);
-    }
+// //Callback Function
+// function callback (data) {
+//     console.log(data);
+// }
 
-//Render Graph Function
+//Render Graph Function --
 function makeChart (data, metricName, metricCode, domain) {
 
-
-// `data` - the raw data Compete gives you after the JSONP request
-
-    // var s = document.createElement('script');
-    //     s.type = 'text/javascript';
-    //     s.async = true;
-    //     s.src = buildURL();
-    //     s.id = 'jsonp';
-    // var h = document.getElementsByTagName('script')[0];
-    //     h.parentNode.insertBefore(s, h);//insert before main.js
-
+    console.log(data);
 
 
     // `metricName` - a name from the Metric drop down.
