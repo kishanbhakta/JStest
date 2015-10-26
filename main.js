@@ -64,9 +64,9 @@ function makeChart (data, metricName, metricCode, domain) {
              // console.log(something);
             // console.log(latest);
                 if(start_date === '' || end_date === ''){
-                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=' + callback;
+                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
                 } else{
-                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=' + callback;
+                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
                     }
             };
                     console.log(buildURL());
