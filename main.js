@@ -34,48 +34,54 @@
 // 3. `callback` receives the data and then calls `makeChart` with the data and the three other parameters read from the inputs.
 
 
-var goBtn = document.getElementById('go');
-goBtn.onclick = function(){console.log(makeChart())};
 
+
+var goBtn = document.getElementById('go');
+    goBtn.onclick = makeChart();
+
+
+//Callback functions
+function callback (data) {
+    console.log(data);
+    makeChart();
+    }
 
 function makeChart (data, metricName, metricCode, domain) {
 
-    // Create URL
-
+// Create URL
         function buildURL(data) {
-            var url = "https://apps.compete.com/sites/";
-                // console.log(url);
-            var domain = document.getElementById("domain").value;
-                // console.log(domain);
-            var e = document.getElementById("metric");
-            var metric = e.options[e.selectedIndex].value;
-                // console.log(metric);
-            var sd = document.getElementsByName("start_date")[0].value;
-            var start_date = sd.replace(/-/g,"");
-                // console.log(start_date);
-            var ed = document.getElementsByName("end_date")[0].value;
-            var end_date = ed.replace(/-/g,"");
-                // console.log(end_date);
-            var apiKey = "d52368aed29abbf531b8b944c5a48092";
-            var latest = document.getElementsByName("latest")[0].value;
-            // console.log(data);
+                    var url = "https://apps.compete.com/sites/";
+                        // console.log(url);
+                    var domain = document.getElementById("domain").value;
+                        // console.log(domain);
+                    var e = document.getElementById("metric");
+                    var metric = e.options[e.selectedIndex].value;
+                        // console.log(metric);
+                    var sd = document.getElementsByName("start_date")[0].value;
+                    var start_date = sd.replace(/-/g,"");
+                        // console.log(start_date);
+                    var ed = document.getElementsByName("end_date")[0].value;
+                    var end_date = ed.replace(/-/g,"");
+                        // console.log(end_date);
+                    var apiKey = "d52368aed29abbf531b8b944c5a48092";
+                    var latest = document.getElementsByName("latest")[0].value;
+                    // console.log(latest);
+                        if(start_date === '' || end_date === ''){
+                            return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
+                        } else{
+                        return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
+                            }
 
-             // var something = data.data.trends
-             // console.log(something);
-            // console.log(latest);
-                if(start_date === '' || end_date === ''){
-                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
-                } else{
-                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
-                    }
-            };
+                    };
+
+                    buildURL();
+
                     console.log(buildURL());
-    //Callback functions
-        function callback (data) {
-            console.log(data);
-        };
 
-    // `data` - the raw data Compete gives you after the JSONP request
+
+
+
+// `data` - the raw data Compete gives you after the JSONP request
 
         var s = document.createElement('script');
             s.type = 'text/javascript';
