@@ -27,69 +27,70 @@
 
 // Feel free to e-mail lots of questions.
 
-// Try to make your code work like this:
-// 1. The user clicks GO
-// 2. This triggers an .onclick event listener where you read input values to construct the url for the `src` of the script tag.
-// This url should include a `jsonp=callback` query parameter, where callback is a function that receives data from compete.
-// 3. `callback` receives the data and then calls `makeChart` with the data and the three other parameters read from the inputs.
+//onClick event on buildURL()
+document.getElementById('go').addEventListener('click', function(){
+    buildURL();
+    appendScript();
+    // makeChart();
+});
 
-
-
-
-var goBtn = document.getElementById('go');
-    goBtn.onclick = makeChart();
-
-
-//Callback functions
-function callback (data) {
-    console.log(data);
-    makeChart();
-    }
-
-function makeChart (data, metricName, metricCode, domain) {
 
 // Create URL
-        function buildURL(data) {
-                    var url = "https://apps.compete.com/sites/";
-                        // console.log(url);
-                    var domain = document.getElementById("domain").value;
-                        // console.log(domain);
-                    var e = document.getElementById("metric");
-                    var metric = e.options[e.selectedIndex].value;
-                        // console.log(metric);
-                    var sd = document.getElementsByName("start_date")[0].value;
-                    var start_date = sd.replace(/-/g,"");
-                        // console.log(start_date);
-                    var ed = document.getElementsByName("end_date")[0].value;
-                    var end_date = ed.replace(/-/g,"");
-                        // console.log(end_date);
-                    var apiKey = "d52368aed29abbf531b8b944c5a48092";
-                    var latest = document.getElementsByName("latest")[0].value;
-                    // console.log(latest);
-                        if(start_date === '' || end_date === ''){
-                            return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
-                        } else{
-                        return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
-                            }
+function buildURL (data) {
+            var url = "https://apps.compete.com/sites/";
+                // console.log(url);
+            var domain = document.getElementById("domain").value;
+                // console.log(domain);
+            var e = document.getElementById("metric");
+            var metric = e.options[e.selectedIndex].value;
+                // console.log(metric);
+            var sd = document.getElementsByName("start_date")[0].value;
+            var start_date = sd.replace(/-/g,"");
+                // console.log(start_date);
+            var ed = document.getElementsByName("end_date")[0].value;
+            var end_date = ed.replace(/-/g,"");
+                // console.log(end_date);
+            var apiKey = "d52368aed29abbf531b8b944c5a48092";
+            var latest = document.getElementsByName("latest")[0].value;
+            // console.log(latest);
+                if(start_date === '' || end_date === ''){
+                    return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&latest=' + latest + '&jsonp=callback';
+                } else{
+                return url + domain + '/' + 'trended/' + metric + '/?apikey=' + apiKey + '&start_date=' + start_date + '&end_date=' + end_date + '&jsonp=callback';
+                    }
 
-                    };
+            };
 
-                    buildURL();
+            // console.log(buildURL());
 
-                    console.log(buildURL());
+function appendScript(s, h){
+    var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = buildURL();
+        s.id = 'jsonp';
+    var h = document.getElementsByTagName('script')[0];
+        h.parentNode.insertBefore(s, h);
+}
 
+//Callback Function
+function callback (data) {
+    console.log(data);
+    }
 
+//Render Graph Function
+function makeChart (data, metricName, metricCode, domain) {
 
 
 // `data` - the raw data Compete gives you after the JSONP request
 
-        var s = document.createElement('script');
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = buildURL();
-            s.id = 'jsonp';
-        var h = document.getElementsByTagName('script')[0];
-            h.parentNode.insertBefore(s, h);//insert before main.js
+    // var s = document.createElement('script');
+    //     s.type = 'text/javascript';
+    //     s.async = true;
+    //     s.src = buildURL();
+    //     s.id = 'jsonp';
+    // var h = document.getElementsByTagName('script')[0];
+    //     h.parentNode.insertBefore(s, h);//insert before main.js
 
 
 
